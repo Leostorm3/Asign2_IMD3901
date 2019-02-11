@@ -41,9 +41,14 @@ AFRAME.registerComponent('delete-cow-component',
 
         },
         DeleteCow: function () {
+            var deletesound = new Audio('/assets/sound/Laser.mp3');
             //can create functions during runtime
             const Context_AF = this;
             if( DeleteCowmode== true){
+            deletesound.currentTime = 1;    
+            deletesound.volume = 0.5;
+            deletesound.play();
+
                 Context_AF.el.parentNode.removeChild(Context_AF.el);
             }
         }
