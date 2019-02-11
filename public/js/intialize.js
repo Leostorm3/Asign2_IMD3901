@@ -1,5 +1,13 @@
 function GenerateGround() {
     //can create functions during runtime
+    //we will create our music right here
+    var bagMusic = new Audio('/assets/sound/Lon_Lon_Ranch_The Legend_of_Zelda.mp3');
+    bagMusic.volume = 0.5;
+    bagMusic.loop = true;
+    bagMusic.play();
+
+
+
    
     var i;
     var y;
