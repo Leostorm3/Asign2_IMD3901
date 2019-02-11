@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head >
+    <title>Assign2</title>
+    <meta name="description" content="Hello, WebVR! - A-Frame">
+    <script src="/js/aframe.min.js"></script> <!-- https://github.com/aframevr/aframe -->
+    <script src="/js/spherical-env-map.js"></script> <!-- https://github.com/aframevr/aframe -->
+    <script src="/js/create-cow.js"></script> <!-- https://github.com/aframevr/aframe -->
+    <script src="/js/delete-cow.js"></script>
+    <script src="/js/size-cow.js"></script>
+    <script src="/js/intialize.js"></script>
+
+</head>
+<body onload="GenerateGround()" >
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+             var DeleteCowmode = false;
+                let socket = io();
+        
+                //default connect event
+                socket.on('connect', function() {
+                    console.log("connected!");
+                });
+                </script>
+    <a-scene shadow="type:basic;">
+        <a-assets timeout="3000">
+            <img id="skymap" src="/assets/textures/CloudySky.jpg">
+            <img id="cowmap" src="/assets/textures/Cow.png">
+            <img id="groudmap" src="/assets/textures/grasstexture.jpg">
+           
+                <a-asset-item id="Cow-obj" src="/assets/models/Cow.obj">
+                <a-asset-item id="Grass" src="/assets/models/ground_/grassPlane.obj">    
+                    
+
+        </a-assets>
+
+        <a-entity position="0 2 0" camera look-controls wasd-controls>
+            <a-entity cursor="fuse:true; fuseTimeout:500;"
+                      position="0 0 -1"
+                      geometry="primitive:ring; radiusInner:0.02; radiusOuter: 0.03;"
+                      material="shader:flat; color:black">
+                      <a-text id="text"  value="Look at objects for differents effects to happen" color="#BBB" position="-0.7 0.6 0" rotation="0 0 0" scale="0.3 0.3 0.3"></a-text>
+                    
+                    </a-entity>
+            
+
+
+        </a-entity>
+
+        <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
+        <a-entity light="type: ambient; intensity: 1.0; color:#bbb;"></a-entity>
+
+        
+        
+        <a-box create-cow-component color="red"  position="-2 0.5 -3" rotation="0 30 0" scale="0.5 0.5 0.5">
+                <a-animation attribute="position" to="-2 2 -3" direction="alternate" dur="5000"
+                  repeat="indefinite"></a-animation> 
+                  <a-text value="GENERATE COWS" color="#BBB" position="-1.5 1 0" rotation="0 0 0" scale="1.5 1.5 1.5"></a-text>
+              </a-box>
+
+              <a-box delete-cow-mode color="blue"  position="2 0.5 -3" rotation="0 -30 0" scale="0.5 0.5 0.5">
+                    <a-animation attribute="position" to="2 2 -3" direction="alternate" dur="5000"
+                      repeat="indefinite"></a-animation> 
+                      <a-text value="Delete Cow Mode" color="#BBB" position="-1.5 1 0" rotation="0 0 0" scale="1.5 1.5 1.5"></a-text>
+                  </a-box>
+       
+
+        <a-entity id="sky"
+                  geometry="primitive:sphere; radius:500;"
+                  material="shader:flat; src:#skymap; side:back; height:2048; width:2048"></a-entity>
+    </a-scene>
+</body>
+</html>
+
